@@ -1,7 +1,11 @@
 # Advanced Topics in Computer Science
+
 ## Homework 7 (20 pts)
+
 ### Due: January 15, 2021
+
 #### SUBMISSION FILE: lastname\_hw7.py OR lastname\_hw7.ipynb OR lastname\_hw7.zip
+
 __!! submit with the correct file name !!__
 
 ---
@@ -18,14 +22,16 @@ __ASK ME!__
 
 ## On Code Quality 
 
-
 ### Code Readability
+
 The readability of your code __will__ matter this time. Make sure that you are using variable, class, function, and method names that are descriptive. Make sure that you are not being _too_ clever with your code, or that if you are you use comments to explain non-obvious statements and expressions. Use document strings to summarize the output of function and method calls. The purpose of this is __NOT__ busy work. The purpose of this is to make your code more readable for others, even if others is _Future You_.
 
 ### Testing
+
 You are expected to use tests when developing your code. We have not covered this in class, but this is an excellent habit of professional coders. This does not have to be an onerous exercise. Simply using ```assert``` statements liberally will get you a lot of mileage.
 
 ### Logging
+
 To help with your development and debugging consider using the Python ```logging``` module. Read here, [Python Logging](https://realpython.com/python-logging/) for a quick overview of how to use it. Below is an example usage.
 
 ```
@@ -55,7 +61,7 @@ setup_logging(logging.WARNING)
 
 ## Build a Test Data Set
 
-Make a test data set, ```db```, from the student database. Your data set should have:
+Make a test data set, ```test_db```, from the student database. Your data set should have:
 
 * Advanced students only
 * Ratings for the following songs only: ``` ["Kiss","Scrubs","Space Cowboy","Pollyana","Moonlight Sonata","Young Dumb and Broke","Feeling Good"]```
@@ -65,8 +71,8 @@ Your code should pass the following test:
 ```
 ids = ['student1397', 'student1890', 'student4157', 'student4917', 'student5231', 'student632', 'student7408', 'student914', 'student9279', 'student9550', 'student9804']
 
-assert len(db) == 11
-assert all( id in ids for id in db.keys())
+assert len(test_db) == 11
+assert all( id in ids for id in test_db.keys())
 
 ```
 
@@ -83,13 +89,13 @@ shared('914','9804')
 # returns the following 
 ['Space Cowboy', 'Feeling Good', 'Scrubs', 'Young Dumb and Broke', 'Kiss', 'Moonlight Sonata']
 
-shared('914','9804')
+shared('student5231','student4157')
 
 # returns the following 
 ['Scrubs', 'Pollyana', 'Young Dumb and Broke', 'Kiss', 'Moonlight Sonata']
 
 
-shared('914','9804')
+shared('student1397','student7408')
 
 # returns the following 
 ['Space Cowboy', 'Feeling Good', 'Scrubs', 'Pollyana', 'Young Dumb and Broke', 'Kiss', 'Moonlight Sonata']
@@ -109,10 +115,9 @@ euclidean(dictionary_key_studentId_value_ratings, studentId_1, studentId_2)
 Your code should pass the following assertions. Notice that I am using the ```isclose``` method to compare the floats:
 
 ```
-
-assert math.isclose( euclidean(test_db,'student914','student9804'), 25.0 )
-assert math.isclose( euclidean(test_db,'student5231','student4157'), 9.0 )
-assert math.isclose( euclidean(test_db,'student1397','student7408'), 19.0 )
+assert math.isclose( euclidean(test_db,'student914','student9804'), 5.0 )
+assert math.isclose( euclidean(test_db,'student5231','student4157'), 3.0 )
+assert math.isclose( euclidean(test_db,'student1397','student7408'), 4.3589, rel_tol=0.0009 )
 
 ```
 
