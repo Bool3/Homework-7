@@ -20,11 +20,12 @@ def sim_euclidean(studentID_a, studentID_b, database):
         point_summation += abs(database[studentID_a][song] - database[studentID_b][song]) ** 2
     
     return math.sqrt(point_summation)
-
-assert math.isclose(sim_euclidean('student914', 'student9804', test_db), 5.0)
-assert math.isclose(sim_euclidean('student5231', 'student4157', test_db), 3.0)
-assert math.isclose(sim_euclidean('student1397', 'student7408', test_db), 4.3589, rel_tol=0.0009)
-
+"""
+print(sim_euclidean('student914', 'student9804', test_db))
+assert math.isclose(sim_euclidean('student914', 'student9804', test_db), 0.0384, rel_tol = 0.009)
+assert math.isclose(sim_euclidean('student5231', 'student4157', test_db), 0.1, rel_tol = 0.009) 
+assert math.isclose(sim_euclidean('student1397', 'student7408', test_db), 0.05, rel_tol = 0.009)
+"""
 def sim_pearson(studentID_a, studentID_b, database):
     both_rated = shared(studentID_a, studentID_b, database)
     n = len(both_rated)
@@ -74,30 +75,17 @@ def top_matches(studentID, database, n=5, sim_function=sim_euclidean):
 results_euclidean = top_matches('student1890', test_db)
 results_pearson = top_matches('student1890', test_db, 5, sim_pearson)
 
-def combine_scores(results_a, results_b, n=5):
-    results_c = []
+print(results_pearson)
+print(results_euclidean)
 
-    def sort_by_sID(e):
-        return e[1]
+print("EUCLIDEAN (HIGHEST):")
+for i in range(2):
+    print(f"{i + 1}. {results_euclidean[i][0]}")
 
-    for i in range(len(results_a)):
-        res_a = results_a[i]
-        res_b = results_b[i]
+print("PEARSON (HIGHEST):")
+for i in range(2):
+    print(f"{i + 1}. {results_pearson[i][0]}")
 
-        if res_a[0] == res_b[0]:
-            results_c.append((res_a[0], res_a[1] + res_b[1]))
-
-        else:
-            results_c.append(res_a)
-            results_c.append(res_b)
-
-    results_c.sort(key=sort_by_sID, reverse=True)
-
-    for i in range(len(results_c) - n):
-        if i >= 0:
-            results_c.pop(-i - 1)
-
-    return results_c
-
-final = combine_scores(results_euclidean, results_pearson)
-print(final)
+print("PEARSON (LOWEST):")
+for i in range(2):
+    print(f"{i + 1}. {results_pearson[-i][0]}")
